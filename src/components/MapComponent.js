@@ -12,7 +12,6 @@ const options = {
   zoom: 11,
   styles: MAP_STYLE,
   disableDefaultUI: true
-
 };
 
 /**
