@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState } from "react";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Layout, Row, Col } from "antd";
 
@@ -10,6 +11,29 @@ import Navigation from "../src/components/Navigation";
 const { Content } = Layout;
 
 export default function Home() {
+  const [page, setPage] = useState("1");
+
+  function getPage() {
+    switch (page) {
+      case 2:
+        return null
+      default:
+        return (
+          <Row>
+            <Col span={6} style={{ padding: "0 16px" }}>
+              <CCTV />
+            </Col>
+            <Col span={12} style={{ padding: "0 16px" }}>
+              <Map />
+            </Col>
+            <Col span={6} style={{ padding: "0 16px" }}>
+              <Dashboard />
+            </Col>
+          </Row>
+        )
+    }
+  }
+
   return (
     <div>
       <Head>
@@ -19,19 +43,12 @@ export default function Home() {
       </Head>
       <main>
         <Layout>
-          <Navigation />
+          <Navigation
+            page={page}
+            setPage={setPage}
+          />
           <Content style={{ background: "#2A2C34" }}>
-            <Row>
-              <Col span={6} style={{ padding: "0 16px" }}>
-                <CCTV />
-              </Col>
-              <Col span={12} style={{ padding: "0 16px" }}>
-                <Map />
-              </Col>
-              <Col span={6} style={{ padding: "0 16px" }}>
-                <Dashboard />
-              </Col>
-            </Row>
+            {getPage()}
           </Content>
         </Layout>
       </main >
