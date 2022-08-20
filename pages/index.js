@@ -15,8 +15,11 @@ export default function Home() {
 
   function getPage() {
     switch (page) {
-      case 2:
-        return null
+      case "2":
+      case "3":
+      case "4":
+        return <div style={{ height: "100vh", color: "white" }}>{page}</div>
+      case "1":
       default:
         return (
           <Row>

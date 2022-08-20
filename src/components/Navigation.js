@@ -17,10 +17,15 @@ const LABEL_STYLE = {
   lineHeight: "16px"
 }
 
-export default function Navigation() {
+export default function Navigation({ page, setPage }) {
   return (
     <Sider width={80}>
-      <Menu theme="dark" mode="inline">
+      <Menu
+        theme="dark"
+        mode="inline"
+        selectedKeys={[page]}
+        onClick={item => setPage(item.key)}
+      >
         <Menu.Item key="1">
           <AppstoreOutlined style={ICON_STYLE} />
           <div style={LABEL_STYLE}>Dashboard</div>
