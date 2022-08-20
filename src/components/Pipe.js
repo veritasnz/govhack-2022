@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { PulloutContext } from "../context/PulloutContext";
+import { PipeContext } from "../context/PipeContext";
 
 const DEFAULT_OPTIONS = {
   geodesic: true,
@@ -19,7 +19,7 @@ const getColor = (levelNumber) => {
  * E.g. point: { lat: 37.772, lng: -122.214 }
  */
 export const Pipe = ({ map, pipe }) => {
-  const pullout = useContext(PulloutContext);
+  const pipeCtx = useContext(PipeContext);
   const { id, level, startPoint, endPoint } = pipe;
 
   const options = {
@@ -33,7 +33,9 @@ export const Pipe = ({ map, pipe }) => {
 
   const polyline = new google.maps.Polyline(options);
 
-  polyline.addListener("click", () => pullout.open(id));
+  polyline.addListener("click", () => {
+    pipeCtx.setId(id);
+  });
 
   useEffect(() => {
     if (!map) return;

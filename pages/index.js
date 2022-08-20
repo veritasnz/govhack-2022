@@ -1,7 +1,10 @@
 import Head from "next/head";
-import { Map } from "../src/components/Map";
-import { Pullout } from "../src/components/Pullout";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
+
+import { Map } from "../src/components/Map";
+import { Menu } from "../src/components/Menu";
+import { CCTV } from "../src/components/CCTV";
+import { Dashboard } from "../src/components/Dashboard";
 
 export default function Home() {
   return (
@@ -13,8 +16,10 @@ export default function Home() {
       </Head>
 
       <main>
+        <Menu />
+        <CCTV />
         <Map />
-        <Pullout />
+        <Dashboard />
       </main>
     </div>
   );

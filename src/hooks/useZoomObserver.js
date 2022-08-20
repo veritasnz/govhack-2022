@@ -27,7 +27,7 @@ export const useZoomObserver = (map) => {
     const { lat: neLat, lng: neLng } = map.getBounds().getNorthEast();
     const { lat: swLat, lng: swLng } = map.getBounds().getSouthWest();
 
-    console.log(neLat, swLat, neLng, swLng);
+    // console.log(neLat, swLat, neLng, swLng);
 
     const apiData = [{
       id: 1,
