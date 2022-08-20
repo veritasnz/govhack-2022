@@ -1,3 +1,22 @@
+.ant-layout-sider {
+  background: black !important;
+}
+
+.ant-menu {
+  background: black !important;
+}
+
+.ant-menu-item {
+  padding: 0 !important;
+  width: 100%;
+  text-align: center;
+  height: unset !important;
+}
+
+.ant-menu-item-selected {
+  background-color: #16ABBD !important;
+}
+
 .ant-select-selector {
   color: white;
   background: #2A2C34 !important;
