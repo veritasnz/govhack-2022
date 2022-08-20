@@ -40,5 +40,23 @@ export const CCTV = () => {
         }} />
       </div>
     </div>
+    <div className="widget">
+      <div style={{ marginBottom: "16px" }}>
+        <Select defaultValue="3" style={{ width: "100%" }}>
+          <Select.Option value="3">
+            <CheckCircleTwoTone twoToneColor="#16ABBD" />
+            <span style={{ marginLeft: "6px" }}>Camera 3</span>
+          </Select.Option>
+        </Select>
+      </div>
+      <div style={{ height: "calc(100% - 48px)" }}>
+        <div style={{
+          content: "",
+          height: "100%",
+          background: `url('/image3.jpg') 50% 50% no-repeat`,
+          backgroundSize: "cover"
+        }} />
+      </div>
+    </div>
   </div>
 }
