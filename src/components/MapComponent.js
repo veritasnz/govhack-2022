@@ -10,7 +10,9 @@ const options = {
   clickableIcons: false,
   center: { lat: -43.5164485, lng: 172.5824938 },
   zoom: 11,
-  styles: MAP_STYLE
+  styles: MAP_STYLE,
+  disableDefaultUI: true
+
 };
 
 /**
@@ -33,7 +35,7 @@ export const MapComponent = () => {
 
   return (
     <div className="map-wrapper">
-      {!isZoomed && <p className="map-warning">Not zoomed enough</p>}
+      {!isZoomed && <p className="map-warning">Not zoomed enough! Zoom in more to see local pipes</p>}
 
       <div ref={ref} className="map-container" />
       {pipes.map((pipe) => {

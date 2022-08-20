@@ -45,8 +45,14 @@ export const Dashboard = ({ id }) => {
 
   return (
     <div>
-      <p>Id: {data.id}</p>
-      <WaterLevel waterLevel={data.level} />
+      <div className="widget-grid">
+        <div className="widget">
+          <WaterLevel waterLevel={data.level} />
+        </div>
+        <div className="widget">
+
+        </div>
+      </div>
     </div>
   );
 };

@@ -27,24 +27,31 @@ export const useZoomObserver = (map) => {
     const { lat: neLat, lng: neLng } = map.getBounds().getNorthEast();
     const { lat: swLat, lng: swLng } = map.getBounds().getSouthWest();
 
-    // console.log(neLat, swLat, neLng, swLng);
+    // const apiData = [{
+    //   id: 1,
+    //   level: 1,
+    //   startPoint: [-43.516508813449725, 172.60481119477708],
+    //   endPoint: [-43.542943375962224, 172.6611207508225],
+    // },
+    // {
+    //   id: 3,
+    //   level: 2,
+    //   startPoint: [-43.52, 172.61],
+    //   endPoint: [-43.55, 172.67],
+    // }]
 
-    const apiData = [{
-      id: 1,
-      level: 1,
-      startPoint: [-43.516508813449725, 172.60481119477708],
-      endPoint: [-43.542943375962224, 172.6611207508225],
-    },
-    {
-      id: 3,
-      level: 2,
-      startPoint: [-43.52, 172.61],
-      endPoint: [-43.55, 172.67],
-    }]
+    console.log(neLat(), swLat());
+    console.log(neLng(), swLng());
 
-    // fetch(``, {});
+    const url = process.env.NEXT_PUBLIC_ENDPOINT + `/pipe/?start_lat=${neLat()}&end_lat=${swLat()}&start_long=${neLng()}&end_long=${swLng()}`
 
-    setPipes(apiData);
+    console.log("Requesting from: ", url);
+
+    fetch(url).then(resp => {
+      console.log(resp);
+    });
+
+    // setPipes(apiData);
   }, [isZoomed]);
 
   return {

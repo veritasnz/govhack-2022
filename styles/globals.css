@@ -81,11 +81,29 @@ main {
 }
 
 .map-warning {
-  color: red;
+  color: rgb(191, 0, 0);
   position: absolute;
   z-index: 2;
-  top: 1rem;
-  left: 1rem;
+  top: 1.6rem;
+  left: 1.6rem;
   padding: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
   background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 1.4rem rgba(0, 0, 0, 0.3);
+}
+
+/*
+* Widget Grid
+*/
+.widget-grid {
+  display: grid;
+  gap: 3rem;
+}
+
+.widget {
+  padding: 1rem;
+  border: 1px solid #555;
+  border-radius: 3px;
 }
