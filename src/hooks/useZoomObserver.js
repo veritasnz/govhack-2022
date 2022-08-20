@@ -16,7 +16,7 @@ export const useZoomObserver = (map) => {
   }, [map]);
 
   // Get & Set pipes
-  useEffect(async () => {
+  useEffect(() => {
     if (!map) return;
 
     if (!isZoomed) {
