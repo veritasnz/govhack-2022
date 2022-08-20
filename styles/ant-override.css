@@ -25,3 +25,43 @@
 .ant-select-arrow {
   color: white !important;
 }
+
+.ant-form-item {
+  margin: 0 !important;
+}
+
+.ant-form-item-label label {
+  color: white !important;
+}
+
+.ant-switch-checked {
+  background: #16ABBD !important;
+}
+
+.ant-slider-handler {
+  border: solid 2px #16ABBD !important;
+}
+
+.ant-slider-track {
+  background-color: #16ABBD !important;
+}
+
+.ant-radio-group label {
+  color: white !important;
+}
+
+.ant-radio-checked .ant-radio-inner {
+  border-color: #16ABBD !important;
+}
+
+.ant-radio-checked .ant-radio-inner::after {
+  background-color: #16ABBD !important;
+}
+
+.ant-table-thead tr th {
+  background: transparent !important;
+}
+
+.ant-table {
+  background: transparent !important;
+}

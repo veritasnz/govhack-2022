@@ -7,6 +7,7 @@ import { Map } from "../src/components/Map";
 import { CCTV } from "../src/components/CCTV";
 import { Dashboard } from "../src/components/Dashboard";
 import Navigation from "../src/components/Navigation";
+import ActionsPage from "./Actions";
 
 const { Content } = Layout;
 
@@ -16,9 +17,10 @@ export default function Home() {
   function getPage() {
     switch (page) {
       case "2":
+        return <ActionsPage />
       case "3":
       case "4":
-        return <div style={{ height: "100vh", color: "white" }}>{page}</div>
+        return <div className="app-page">{page}</div>
       case "1":
       default:
         return (
