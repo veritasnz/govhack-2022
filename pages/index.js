@@ -4,7 +4,6 @@ import { Layout, Menu } from "antd";
 import { AppstoreOutlined } from '@ant-design/icons';
 
 import { Map } from "../src/components/Map";
-// import { Menu } from "../src/components/Menu";
 import { CCTV } from "../src/components/CCTV";
 import { Dashboard } from "../src/components/Dashboard";
 
@@ -37,7 +36,7 @@ export default function Home() {
             <Dashboard />
           </Content>
         </Layout>
-      </main>
-    </div>
+      </main >
+    </div >
   );
 }
