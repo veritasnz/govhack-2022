@@ -1,6 +1,7 @@
 import Head from "next/head";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Layout, Menu } from "antd";
+import { AppstoreOutlined } from '@ant-design/icons';
 
 import { Map } from "../src/components/Map";
 // import { Menu } from "../src/components/Menu";
@@ -21,7 +22,11 @@ export default function Home() {
         <Layout>
           <Sider width={64}>
             <Menu theme="dark" mode="inline">
-              <Menu.Item key="1">1</Menu.Item>
+              <Menu.Item key="1">
+                <div style={{ width: "100%" }}>
+                  <AppstoreOutlined style={{ fontSize: 42 }} />
+                </div>
+              </Menu.Item>
               <Menu.Item key="2">2</Menu.Item>
               <Menu.Item key="3">3</Menu.Item>
             </Menu>
