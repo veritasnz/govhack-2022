@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const ZOOM_LEVEL = 16;
+
 export const useMapObserver = (map) => {
   const [isZoomed, setIsZoomed] = useState(false);
   const [pipes, setPipes] = useState([]);
@@ -10,37 +12,36 @@ export const useMapObserver = (map) => {
 
     const listener = google.maps.event.addListener(map, "zoom_changed", updateZoom);
 
-    return () => google.maps.event.removeListener(listener)
+    return () => {
+      if (listener) google.maps.event.removeListener(listener)
+    }
   }, [map]);
 
   const updateZoom = () => {
-    setIsZoomed(map.getZoom() >= 17);
+    setIsZoomed(map.getZoom() >= ZOOM_LEVEL);
   }
 
   const updatePipes = () => {
     if (!map) return;
 
-    console.log("Attempting update 1", map.getZoom() >= 17);
-
-    if (!(map.getZoom() >= 17)) {
+    if (!(map.getZoom() >= ZOOM_LEVEL)) {
       setPipes([]);
       return;
     }
-
-    console.log("Attempting update 2");
 
     const { lat: neLat, lng: neLng } = map.getBounds().getNorthEast();
     const { lat: swLat, lng: swLng } = map.getBounds().getSouthWest();
 
     const url = process.env.NEXT_PUBLIC_ENDPOINT + `/pipe/?lat_p1=${neLat()}&lat_p2=${swLat()}&lon_p1=${neLng()}&lon_p2=${swLng()}`
 
+    console.log("Attempting fetch with url:", url);
+
     fetch(url).then(resp => {
       return resp.json();
     }).then((data) => {
-      console.log(data[0]);
       setPipes(data);
-    }).catch(() => {
-      // Do nothing
+    }).catch((err) => {
+      console.error("There has been a fetch error: ", err.message);
     });
   }
 
@@ -48,13 +49,20 @@ export const useMapObserver = (map) => {
   useEffect(() => {
     if (!map) return;
 
-    google.maps.event.addListener(map, "dragend", updatePipes);
+    const listener = google.maps.event.addListener(map, "dragend", updatePipes);
 
-    // return () => google.maps.event.removeListener(listener)
+    return () => {
+      if (listener) google.maps.event.removeListener(listener)
+    }
   }, [map]);
 
   // Get & Set pipes
   useEffect(() => {
+    if (!isZoomed) {
+      setPipes([])
+      return
+    }
+
     updatePipes();
   }, [isZoomed]);
 
