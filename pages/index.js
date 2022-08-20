@@ -3,7 +3,6 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Layout, Menu } from "antd";
 
 import { Map } from "../src/components/Map";
-import { Menu } from "../src/components/Menu";
 import { CCTV } from "../src/components/CCTV";
 import { Dashboard } from "../src/components/Dashboard";
 
