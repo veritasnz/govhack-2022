@@ -2,13 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { useZoomObserver } from "../hooks/useZoomObserver";
 import { Pipe } from "./Pipe";
 
+const options = {
+  maxZoom: 19,
+  minZoom: 11,
+  clickableIcons: false,
+  center: { lat: -43.5164485, lng: 172.5824938 },
+  zoom: 11,
+};
+
 /**
  *{
   center: google.maps.LatLngLiteral;
   zoom: number;
 }
  */
-export const MapComponent = ({ children, ...options }) => {
+export const MapComponent = () => {
   const ref = useRef(null);
 
   const [map, setMap] = useState();

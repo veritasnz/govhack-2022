@@ -3,32 +3,37 @@ import { PulloutContext } from "../context/PulloutContext";
 
 const DEFAULT_OPTIONS = {
   geodesic: true,
-  strokeColor: "#FF0000",
   strokeOpacity: 1.0,
   strokeWeight: 2,
   clickable: true,
 };
 
+const getColor = (levelNumber) => {
+  if (levelNumber === 0) return "green";
+  if (levelNumber === 1) return "yellow";
+  if (levelNumber === 2) return "red";
+};
+
 /**
- * { startPoint, endPoint }
+ * { id, level, startPoint, endPoint }
  * E.g. point: { lat: 37.772, lng: -122.214 }
  */
 export const Pipe = ({ map, pipe }) => {
   const pullout = useContext(PulloutContext);
+  const { id, level, startPoint, endPoint } = pipe;
 
   const options = {
     ...DEFAULT_OPTIONS,
+    strokeColor: getColor(level),
     path: [
-      { lat: pipe.startPoint[0], lng: pipe.startPoint[1] },
-      { lat: pipe.endPoint[0], lng: pipe.endPoint[1] },
+      { lat: startPoint[0], lng: startPoint[1] },
+      { lat: endPoint[0], lng: endPoint[1] },
     ],
   };
 
   const polyline = new google.maps.Polyline(options);
 
-  polyline.addListener("click", () => {
-    pullout.open(pipe.id);
-  });
+  polyline.addListener("click", () => pullout.open(id));
 
   useEffect(() => {
     if (!map) return;
@@ -37,9 +42,7 @@ export const Pipe = ({ map, pipe }) => {
   }, []);
 
   useEffect(() => {
-    return () => {
-      polyline.setMap(null);
-    };
+    return () => polyline.setMap(null);
   }, []);
 
   return;

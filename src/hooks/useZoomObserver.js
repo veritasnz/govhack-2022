@@ -28,6 +28,7 @@ export const useZoomObserver = (map) => {
 
       newPipes.push({
         id: 1,
+        level: 1,
         startPoint: [-43.516508813449725, 172.60481119477708],
         endPoint: [-43.542943375962224, 172.6611207508225],
       });

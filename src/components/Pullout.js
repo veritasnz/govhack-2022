@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { PulloutContext } from "../context/PulloutContext";
 import { Dashboard } from "./Dashboard";
 
-export const Pullout = ({ onClose, showDrawer }) => {
+export const Pullout = () => {
   const pullout = useContext(PulloutContext);
 
   return (
