@@ -64,20 +64,6 @@ main {
 }
 
 /*
-* Widget/Widget Grid
-*/
-.widget-grid {
-  display: grid;
-  grid: 1fr / 1fr 1fr;
-  gap: 2rem;
-}
-
-.widget {
-  padding: 1rem;
-  border: 1px solid;
-}
-
-/*
 * Map
 */
 .map {
