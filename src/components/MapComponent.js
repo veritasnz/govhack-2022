@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { usePipes } from "../hooks/usePipes";
+import { useZoomObserver } from "../hooks/useZoomObserver";
+import { PolyLine } from "./Polyline";
 
 /**
  *{
@@ -17,7 +18,17 @@ export const MapComponent = ({ children, ...options }) => {
     }
   }, [ref, map]);
 
-  usePipes(map);
+  useZoomObserver(map);
 
-  return <div ref={ref} className="map-wrapper" />;
+  return (
+    <>
+      <div ref={ref} className="map-wrapper" />
+      <PolyLine
+        map={map}
+        id={1}
+        startPoint={[-43.516508813449725, 172.60481119477708]}
+        endPoint={[-43.542943375962224, 172.6611207508225]}
+      />
+    </>
+  );
 };

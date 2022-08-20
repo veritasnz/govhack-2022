@@ -2,7 +2,6 @@ import { Wrapper } from "@googlemaps/react-wrapper";
 import { useContext, useMemo } from "react";
 import { PulloutContext } from "../context/PulloutContext";
 import { MapComponent } from "./MapComponent";
-import { PolyLine } from "./Polyline";
 
 export const Map = (props) => {
   const pullout = useContext(PulloutContext);

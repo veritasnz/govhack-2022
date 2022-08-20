@@ -1,11 +1,12 @@
 import React from "react";
 
 const DEFAULT_STATE = {
-    isOpen: false,
-    data: {},
+  id: null,
+  isOpen: false,
+  data: {},
 
-    open: (data) => {},
-    close: () => {},
+  open: (data) => {},
+  close: () => {},
 };
 
 export const PulloutContext = React.createContext(DEFAULT_STATE);
