@@ -4,7 +4,7 @@ import { PipeContext } from "../context/PipeContext";
 const DEFAULT_OPTIONS = {
   geodesic: true,
   strokeOpacity: 1.0,
-  strokeWeight: 10,
+  strokeWeight: 4,
   clickable: true,
 };
 
@@ -12,6 +12,8 @@ const getColor = (levelNumber) => {
   if (levelNumber === 0) return "green";
   if (levelNumber === 1) return "yellow";
   if (levelNumber === 2) return "red";
+
+  return "blue"
 };
 
 /**
@@ -20,23 +22,16 @@ const getColor = (levelNumber) => {
  */
 export const Pipe = ({ map, pipe }) => {
   const pipeCtx = useContext(PipeContext);
-  const { id, level, geometries } = pipe;
-
-  console.log(geometries.map(item => {
-    return {
-      lat: parseFloat(item.longitude),
-      lng: parseFloat(item.latitude)
-    }
-  }));
+  const { id, flow_rate, geometries } = pipe;
 
   const options = {
     ...DEFAULT_OPTIONS,
-    strokeColor: getColor(level),
+    strokeColor: getColor(flow_rate),
     path:
       geometries.map(item => {
         return {
-          lat: parseFloat(item.longitude),
-          lng: parseFloat(item.latitude)
+          lat: parseFloat(item.latitude),
+          lng: parseFloat(item.longitude)
         }
       })
   };

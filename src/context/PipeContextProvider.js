@@ -6,6 +6,7 @@ export const PipeContextProvider = (props) => {
   const [id, _setId] = useState(); // null | number
 
   const setId = (id) => {
+    console.log(`Switching to pipe /w ID: ${id}`);
     _setId(id);
   }
 
