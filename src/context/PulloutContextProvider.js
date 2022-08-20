@@ -3,10 +3,8 @@ import React, { useEffect, useState } from "react";
 import { PulloutContext } from "./PulloutContext";
 
 export const PulloutContextProvider = (props) => {
-    const [data, setData] = useState(null);
+    const [id, setId] = useState(null); // null | number
     const [isOpen, setIsOpen] = useState(false);
-
-    useEffect(() => {}, []);
 
     // Control the "data-modal-is-open" attribute on the :root
     useEffect(() => {
@@ -22,13 +20,13 @@ export const PulloutContextProvider = (props) => {
     /**
      * @param data The data to be gotten from the API
      */
-    const open = (data) => {
-        setData(data);
+    const open = (id) => {
+        setId(id);
         setIsOpen(true);
     };
 
     const close = () => {
-        setData(null);
+        setId(null);
         setIsOpen(false);
     };
 
