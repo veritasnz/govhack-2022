@@ -1,13 +1,13 @@
 import Head from "next/head";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-import { Layout } from "antd";
+import { Layout, Menu } from "antd";
 
 import { Map } from "../src/components/Map";
 import { Menu } from "../src/components/Menu";
 import { CCTV } from "../src/components/CCTV";
 import { Dashboard } from "../src/components/Dashboard";
 
-// const { Sider, Menu } = Layout;
+const { Sider, Content } = Layout;
 
 export default function Home() {
   return (
@@ -18,14 +18,21 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        {/* <Sider>
-          <Menu theme="dark" mode="inline" items={[]} />
-        </Sider> */}
-        <Menu />
-        <CCTV />
-        <Map />
-        <Dashboard />
-      </main>
-    </div>
+        <Layout>
+          <Sider width={64}>
+            <Menu theme="dark" mode="inline">
+              <Menu.Item key="1">1</Menu.Item>
+              <Menu.Item key="2">2</Menu.Item>
+              <Menu.Item key="3">3</Menu.Item>
+            </Menu>
+          </Sider>
+          <Content>
+            <CCTV />
+            <Map />
+            <Dashboard />
+          </Content>
+        </Layout>
+      </main >
+    </div >
   );
 }
