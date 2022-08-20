@@ -23,5 +23,10 @@
     }
   },
 
-  "markdown.styles": [".vscode/markdown.css"] // Force Github styles
+  "markdown.styles": [
+    ".vscode/markdown.css"
+  ],
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  } // Force Github styles
 }
