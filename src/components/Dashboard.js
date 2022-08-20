@@ -6,10 +6,11 @@ export const Dashboard = ({ id }) => {
 
   // if (!id) return;
 
-  const waterLevel = 0.25;
+  const waterLevel = 0.7;
 
   return (
     <div>
+      <p>Id: {id}</p>
       <WaterLevel waterLevel={waterLevel} />
     </div>
   );

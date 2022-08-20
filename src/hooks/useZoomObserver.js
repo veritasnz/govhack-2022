@@ -29,20 +29,22 @@ export const useZoomObserver = (map) => {
 
     console.log(neLat, swLat, neLng, swLng);
 
+    const apiData = [{
+      id: 1,
+      level: 1,
+      startPoint: [-43.516508813449725, 172.60481119477708],
+      endPoint: [-43.542943375962224, 172.6611207508225],
+    },
+    {
+      id: 3,
+      level: 2,
+      startPoint: [-43.52, 172.61],
+      endPoint: [-43.55, 172.67],
+    }]
+
     // fetch(``, {});
 
-    setPipes((prev) => {
-      const newPipes = [...prev];
-
-      newPipes.push({
-        id: 1,
-        level: 1,
-        startPoint: [-43.516508813449725, 172.60481119477708],
-        endPoint: [-43.542943375962224, 172.6611207508225],
-      });
-
-      return newPipes;
-    });
+    setPipes(apiData);
   }, [isZoomed]);
 
   return {
