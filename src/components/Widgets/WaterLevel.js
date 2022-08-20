@@ -3,7 +3,7 @@ import { Liquid } from '@ant-design/plots';
 export const WaterLevel = ({ waterLevel }) => {
   const config = {
     percent: waterLevel,
-    shape: 'rect',
+    shape: 'circle',
     outline: {
       border: 2,
       distance: 4,
@@ -11,8 +11,16 @@ export const WaterLevel = ({ waterLevel }) => {
     wave: {
       length: 128,
     },
+    liquidStyle: {
+      fill: "#16ABBD"
+    },
+    autoFit: true
   };
 
 
-  return <Liquid {...config} />
+  return (
+    <div className='metric-container'>
+      <Liquid {...config} />
+    </div>
+  )
 }

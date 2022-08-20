@@ -1,3 +1,8 @@
 .ant-select-selector {
+  color: white;
   background: #2A2C34 !important;
+}
+
+.ant-select-arrow {
+  color: white !important;
 }

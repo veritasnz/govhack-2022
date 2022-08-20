@@ -1,22 +1,25 @@
 import { useContext } from "react";
 import useSWR from "swr";
+import { Select } from "antd";
 
 import { PipeContext } from "../context/PipeContext";
 import { WaterLevel } from "./Widgets/WaterLevel";
+import { WaterVelocity } from "./Widgets/WaterVelocity";
+import { WaterTimeSeries } from "./Widgets/WaterTimeSeries";
 
 export const Dashboard = ({ id }) => {
   const pipeCtx = useContext(PipeContext);
   // const { data } = useSWR("", { refreshInterval: 1 });
 
-  if (!pipeCtx.id) {
-    return <p>
-      No pipe specified
-    </p>;
-  }
+  // if (!pipeCtx.id) {
+  //   return <p>
+  //     No pipe specified
+  //   </p>;
+  // }
 
   const data = {
     id: pipeCtx.id,
-    level: 0.25, // Added
+    level: 0.7049, // Added
     geometries: [
       {
         id: 1,
@@ -44,14 +47,30 @@ export const Dashboard = ({ id }) => {
   }
 
   return (
-    <div>
-      <div className="widget-grid">
-        <div className="widget">
-          <WaterLevel waterLevel={data.level} />
-        </div>
-        <div className="widget">
-
-        </div>
+    <div className="widget-grid">
+      <div className="widget">
+        <Select defaultValue="1" style={{ width: "100%" }}>
+          <Select.Option value="1">
+            <span>Water Level (Current)</span>
+          </Select.Option>
+        </Select>
+        <WaterLevel waterLevel={data.level} />
+      </div>
+      <div className="widget">
+        <Select defaultValue="1" style={{ width: "100%" }}>
+          <Select.Option value="1">
+            <span>Water Level (Time Series)</span>
+          </Select.Option>
+        </Select>
+        <WaterTimeSeries waterVelocity={data.level} />
+      </div>
+      <div className="widget">
+        <Select defaultValue="1" style={{ width: "100%" }}>
+          <Select.Option value="1">
+            <span>Water Velocity</span>
+          </Select.Option>
+        </Select>
+        <WaterVelocity waterVelocity={data.level} />
       </div>
     </div>
   );

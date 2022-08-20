@@ -21,9 +21,7 @@ export default function Home() {
         <Layout>
           <Sider width={64}>
             <Menu theme="dark" mode="inline">
-              <Menu.Item key="1">
-                1
-              </Menu.Item>
+              <Menu.Item key="1">1</Menu.Item>
               <Menu.Item key="2">2</Menu.Item>
               <Menu.Item key="3">3</Menu.Item>
             </Menu>

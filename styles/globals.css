@@ -98,12 +98,23 @@ main {
 * Widget Grid
 */
 .widget-grid {
-  display: grid;
-  gap: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+  height: 100%;
 }
 
 .widget {
-  padding: 1rem;
+  color: white;
+  height: 0%;
   border: 1px solid #555;
   border-radius: 3px;
+  flex-grow: 1;
+  padding: 8px;
+  background: black;
+}
+
+.metric-container {
+  height: calc(100% - 16px);
 }

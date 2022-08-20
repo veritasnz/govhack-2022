@@ -1,23 +1,30 @@
 import React from "react";
 import Image from "next/image";
 import { Select } from "antd";
+import { CheckCircleTwoTone } from "@ant-design/icons";
 
 export const CCTV = () => {
-  return <div style={{ background: "black", height: "100%", color: "white" }}>
-    <div style={{ height: "calc(50% - 8px)", marginBottom: "16px" }}>
-      <div style={{ padding: "8px 8px 0 8px" }}>
+  return <div className="widget-grid">
+    <div className="widget">
+      <div style={{ marginBottom: "16px" }}>
         <Select defaultValue="1" style={{ width: "100%" }}>
-          <Select.Option value="1">Camera 1</Select.Option>
+          <Select.Option value="1">
+            <CheckCircleTwoTone twoToneColor="#16ABBD" />
+            <span style={{ marginLeft: "6px" }}>Camera 1</span>
+          </Select.Option>
         </Select>
       </div>
       <div style={{}}>
         <Image src={"/image 2.jpg"} width="576" height="384" />
       </div>
     </div>
-    <div style={{ height: "calc(50% - 8px)" }}>
-      <div style={{ padding: "8px 8px 0 8px" }}>
+    <div className="widget">
+      <div style={{ marginBottom: "16px" }}>
         <Select defaultValue="2" style={{ width: "100%" }}>
-          <Select.Option value="2">Camera 2</Select.Option>
+          <Select.Option value="2">
+            <CheckCircleTwoTone twoToneColor="#16ABBD" />
+            <span style={{ marginLeft: "6px" }}>Camera 2</span>
+          </Select.Option>
         </Select>
       </div>
       <div style={{}}>
