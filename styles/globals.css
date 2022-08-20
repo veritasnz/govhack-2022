@@ -89,7 +89,7 @@ main {
   margin-top: 16px;
   background: black;
   height: 48px;
-  color: white;
+  color: #16ABBD;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -101,7 +101,7 @@ main {
 
 .map-container {
   width: 100%;
-  height: calc(100vh - 82px);
+  height: calc(100vh - 80px);
   margin-bottom: 16px;
   border: 1px solid #555;
   border-top: 0;
