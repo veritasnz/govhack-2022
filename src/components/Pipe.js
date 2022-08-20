@@ -13,32 +13,34 @@ const DEFAULT_OPTIONS = {
  * { startPoint, endPoint }
  * E.g. point: { lat: 37.772, lng: -122.214 }
  */
-export const PolyLine = ({ map, startPoint, endPoint, id }) => {
+export const Pipe = ({ map, pipe }) => {
   const pullout = useContext(PulloutContext);
 
   const options = {
     ...DEFAULT_OPTIONS,
     path: [
-      { lat: startPoint[0], lng: startPoint[1] },
-      { lat: endPoint[0], lng: endPoint[1] },
+      { lat: pipe.startPoint[0], lng: pipe.startPoint[1] },
+      { lat: pipe.endPoint[0], lng: pipe.endPoint[1] },
     ],
   };
 
   const polyline = new google.maps.Polyline(options);
 
   polyline.addListener("click", () => {
-    pullout.open(id);
+    pullout.open(pipe.id);
   });
 
   useEffect(() => {
     if (!map) return;
 
     polyline.setMap(map);
-  }, [polyline, map]);
+  }, []);
 
-  // useEffect(() => {
-  //   if (!map) return;
-  // }, [map]);
+  useEffect(() => {
+    return () => {
+      polyline.setMap(null);
+    };
+  }, []);
 
   return;
 };

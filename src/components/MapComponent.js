@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useZoomObserver } from "../hooks/useZoomObserver";
-import { PolyLine } from "./Polyline";
+import { Pipe } from "./Pipe";
 
 /**
  *{
@@ -18,17 +18,16 @@ export const MapComponent = ({ children, ...options }) => {
     }
   }, [ref, map]);
 
-  useZoomObserver(map);
+  const { pipes, isZoomed } = useZoomObserver(map);
 
   return (
-    <>
-      <div ref={ref} className="map-wrapper" />
-      <PolyLine
-        map={map}
-        id={1}
-        startPoint={[-43.516508813449725, 172.60481119477708]}
-        endPoint={[-43.542943375962224, 172.6611207508225]}
-      />
-    </>
+    <div className="map-wrapper">
+      {!isZoomed && <p className="map-warning">Not zoomed enough</p>}
+
+      <div ref={ref} className="map-container" />
+      {pipes.map((pipe) => {
+        return <Pipe key={pipe.id} pipe={pipe} map={map} />;
+      })}
+    </div>
   );
 };
