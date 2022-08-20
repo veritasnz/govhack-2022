@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useZoomObserver } from "../hooks/useZoomObserver";
 import { Pipe } from "./Pipe";
 
+import { MAP_STYLE } from "../utils/constants";
+
 const options = {
   maxZoom: 19,
   minZoom: 11,
   clickableIcons: false,
   center: { lat: -43.5164485, lng: 172.5824938 },
   zoom: 11,
+  styles: MAP_STYLE
 };
 
 /**
