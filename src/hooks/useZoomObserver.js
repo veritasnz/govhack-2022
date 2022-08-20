@@ -15,13 +15,21 @@ export const useZoomObserver = (map) => {
     });
   }, [map]);
 
-  useEffect(() => {
+  // Get & Set pipes
+  useEffect(async () => {
     if (!map) return;
 
     if (!isZoomed) {
       setPipes([]);
       return;
     }
+
+    const { lat: neLat, lng: neLng } = map.getBounds().getNorthEast();
+    const { lat: swLat, lng: swLng } = map.getBounds().getSouthWest();
+
+    console.log(neLat, swLat, neLng, swLng);
+
+    // fetch(``, {});
 
     setPipes((prev) => {
       const newPipes = [...prev];

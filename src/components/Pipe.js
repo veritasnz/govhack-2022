@@ -4,7 +4,7 @@ import { PulloutContext } from "../context/PulloutContext";
 const DEFAULT_OPTIONS = {
   geodesic: true,
   strokeOpacity: 1.0,
-  strokeWeight: 2,
+  strokeWeight: 10,
   clickable: true,
 };
 
