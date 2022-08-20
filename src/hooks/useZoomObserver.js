@@ -11,12 +11,11 @@ export const useZoomObserver = (map) => {
     google.maps.event.addListener(map, "zoom_changed", function () {
       const zoom = map.getZoom();
 
-      setIsZoomed(zoom >= 15);
+      setIsZoomed(zoom >= 18);
     });
   }, [map]);
 
-  // Get & Set pipes
-  useEffect(() => {
+  const updatePipes = () => {
     if (!map) return;
 
     if (!isZoomed) {
@@ -27,31 +26,58 @@ export const useZoomObserver = (map) => {
     const { lat: neLat, lng: neLng } = map.getBounds().getNorthEast();
     const { lat: swLat, lng: swLng } = map.getBounds().getSouthWest();
 
-    // const apiData = [{
-    //   id: 1,
-    //   level: 1,
-    //   startPoint: [-43.516508813449725, 172.60481119477708],
-    //   endPoint: [-43.542943375962224, 172.6611207508225],
-    // },
-    // {
-    //   id: 3,
-    //   level: 2,
-    //   startPoint: [-43.52, 172.61],
-    //   endPoint: [-43.55, 172.67],
-    // }]
+    //   {
+    //     "id": 560539,
+    //     "geometries": [
+    //         {
+    //             "id": 494241,
+    //             "latitude": "172.6115272600110000",
+    //             "longitude": "-43.4501327895932000",
+    //             "level": 16.8989000000001,
+    //             "pipe": 560539
+    //         },
+    //         {
+    //             "id": 494242,
+    //             "latitude": "172.6107850226030000",
+    //             "longitude": "-43.4494696223705000",
+    //             "level": 15.8999999999942,
+    //             "pipe": 560539
+    //         },
+    //         {
+    //             "id": 494243,
+    //             "latitude": "172.6107844261410000",
+    //             "longitude": "-43.4494681976500000",
+    //             "level": 15.8999999999942,
+    //             "pipe": 560539
+    //         }
+    //     ],
+    //     "asset_id": "IE000000000011196940",
+    //     "pipe_type": "Gravity",
+    //     "length": 95.2,
+    //     "shape_length": 95.1975386359612,
+    //     "district": "Christchurch",
+    //     "diameter": 450,
+    //     "material": "UPVC",
+    //     "depth": 1.63
+    // }
 
-    console.log(neLat(), swLat());
-    console.log(neLng(), swLng());
+    const url = process.env.NEXT_PUBLIC_ENDPOINT + `/pipe/?lat_p1=${neLat()}&lat_p2=${swLat()}&lon_p1=${neLng()}&lon_p2=${swLng()}`
 
-    const url = process.env.NEXT_PUBLIC_ENDPOINT + `/pipe/?start_lat=${neLat()}&end_lat=${swLat()}&start_long=${neLng()}&end_long=${swLng()}`
-
-    console.log("Requesting from: ", url);
-
-    fetch(url).then(resp => {
-      console.log(resp);
+    fetch(url).then(resp => resp.json()).then((data) => {
+      setPipes(data);
     });
+  }
 
-    // setPipes(apiData);
+  // Listen for zoom changes and adjust `isZoomed`
+  useEffect(() => {
+    if (!map) return;
+
+    google.maps.event.addListener(map, "bounds_changed", updatePipes);
+  }, [map]);
+
+  // Get & Set pipes
+  useEffect(() => {
+    updatePipes();
   }, [isZoomed]);
 
   return {

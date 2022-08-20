@@ -6,7 +6,6 @@ export const PipeContextProvider = (props) => {
   const [id, _setId] = useState(); // null | number
 
   const setId = (id) => {
-    console.log(id);
     _setId(id);
   }
 

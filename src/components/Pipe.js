@@ -20,15 +20,25 @@ const getColor = (levelNumber) => {
  */
 export const Pipe = ({ map, pipe }) => {
   const pipeCtx = useContext(PipeContext);
-  const { id, level, startPoint, endPoint } = pipe;
+  const { id, level, geometries } = pipe;
+
+  console.log(geometries.map(item => {
+    return {
+      lat: parseFloat(item.longitude),
+      lng: parseFloat(item.latitude)
+    }
+  }));
 
   const options = {
     ...DEFAULT_OPTIONS,
     strokeColor: getColor(level),
-    path: [
-      { lat: startPoint[0], lng: startPoint[1] },
-      { lat: endPoint[0], lng: endPoint[1] },
-    ],
+    path:
+      geometries.map(item => {
+        return {
+          lat: parseFloat(item.longitude),
+          lng: parseFloat(item.latitude)
+        }
+      })
   };
 
   const polyline = new google.maps.Polyline(options);
