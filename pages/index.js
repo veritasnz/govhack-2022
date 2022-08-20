@@ -25,13 +25,13 @@ export default function Home() {
       default:
         return (
           <Row>
-            <Col span={6} style={{ padding: "0 16px" }}>
+            <Col span={6} style={{ padding: "16px" }}>
               <CCTV />
             </Col>
-            <Col span={12} style={{ padding: "0 16px" }}>
+            <Col span={12} style={{}}>
               <Map />
             </Col>
-            <Col span={6} style={{ padding: "0 16px" }}>
+            <Col span={6} style={{ padding: "16px" }}>
               <Dashboard />
             </Col>
           </Row>

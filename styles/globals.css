@@ -85,9 +85,27 @@ main {
   position: relative;
 }
 
+.map-header {
+  margin-top: 16px;
+  background: black;
+  height: 48px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 16px;
+  border: 1px solid #555;
+  border-bottom: 0;
+  border-radius: 3px 3px 0 0;
+}
+
 .map-container {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 82px);
+  margin-bottom: 16px;
+  border: 1px solid #555;
+  border-top: 0;
+  border-radius: 0 0 3px 3px;
 }
 
 .map-warning {

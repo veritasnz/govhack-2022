@@ -10,7 +10,8 @@ export default function ActionsPage() {
         display: "flex",
         flexDirection: "column",
         gap: "16px"
-      }}>
+      }}
+    >
       <TopPanel />
       <BottomPanel />
     </div>
