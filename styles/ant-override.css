@@ -65,3 +65,11 @@
 .ant-table {
   background: transparent !important;
 }
+
+.ant-table-cell {
+  color: white !important;
+}
+
+.ant-table-tbody tr:hover td {
+	background: unset !important;
+}

@@ -1,4 +1,6 @@
-import { Table } from "antd"
+import { useEffect, useState } from "react";
+import { Table } from "antd";
+import axios from "axios";
 
 const CONTAINER_STYLE = {
   flexGrow: 1,
@@ -11,7 +13,7 @@ const CONTAINER_STYLE = {
 export default function BottomPanel() {
   return (
     <div style={CONTAINER_STYLE}>
-      <LeftPanel />
+      {/* <LeftPanel /> */}
       <RightPanel />
     </div>
   )
@@ -31,12 +33,65 @@ function LeftPanel() {
 }
 
 function RightPanel() {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    axios.get(
+      "https://a4f1-131-203-239-250.au.ngrok.io/pipe/all/",
+      {
+        params: {}
+      }
+    ).then(res => {
+      console.log(res.data.results);
+      setData(res.data.results)
+    })
+  }, [])
+
   return (
     <div style={{ ...ITEM_STYLE, flexGrow: 4 }}>
       <Table
-        columns={[]}
-        dataSource={[]}
+        columns={[
+          {
+            title: "Id",
+            dataIndex: "id",
+            key: "id"
+          },
+          {
+            title: "District",
+            dataIndex: "district",
+            key: "district"
+          },
+          {
+            title: "Diameter",
+            dataIndex: "diameter",
+            key: "diameter"
+          },
+          {
+            title: "Length",
+            dataIndex: "length",
+            key: "length"
+          },
+          {
+            title: "Start",
+            dataIndex: "geometries",
+            key: "start",
+            render: (data) => {
+              const { latitude, longitude } = data[0];
+              return `${latitude} ${longitude}`
+            }
+          },
+          {
+            title: "End",
+            dataIndex: "geometries",
+            key: "end",
+            render: (data) => {
+              const { latitude, longitude } = data[1];
+              return `${latitude} ${longitude}`
+            }
+          }
+        ]}
+        dataSource={data}
         style={{ height: "100%" }}
+        pagination={false}
       />
     </div>
   )

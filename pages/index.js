@@ -67,7 +67,7 @@ export default function Home() {
               <Map />
             </Col>
             <Col span={6} style={{ padding: "16px" }}>
-              {showDashboard ? <Dashboard /> : content}
+              <Dashboard />
             </Col>
           </Row>
         )
