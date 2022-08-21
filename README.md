@@ -43,7 +43,7 @@ yarn dev
 
 [MIT](https://choosealicense.com/licenses/mit/)
 
-## Backend respository
+## Backend repository
 
 - [The Github repository](https://github.com/CheeseStick/govhack-2022-backend) for the backend that supplies the data
 
