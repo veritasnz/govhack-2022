@@ -1,8 +1,16 @@
 import { Liquid } from '@ant-design/plots';
+import { useEffect, useState } from 'react';
 
-export const WaterLevel = ({ waterLevel }) => {
+export const WaterLevel = ({ index, waterLevel }) => {
+  const [currentLevel, setCurrentLevel] = useState(waterLevel);
+  useEffect(() => {
+    if ((index % 100) == 0) {
+      console.log("updated")
+      setCurrentLevel(Math.min(waterLevel, 1));
+    }
+  }, [index]);
+
   const config = {
-    percent: waterLevel,
     shape: 'circle',
     outline: {
       border: 2,
@@ -20,7 +28,7 @@ export const WaterLevel = ({ waterLevel }) => {
 
   return (
     <div className='metric-container'>
-      <Liquid {...config} />
+      <Liquid percent={currentLevel} {...config} />
     </div>
   )
 }
