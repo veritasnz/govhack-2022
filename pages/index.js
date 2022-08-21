@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useContext, useEffect, useRef, useState } from "react";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-import { Layout, Row, Col } from "antd";
+import { Layout, Row, Col, Spin } from "antd";
 
 import { Map } from "../src/components/Map";
 import { CCTV } from "../src/components/CCTV";
@@ -12,28 +12,34 @@ import { PipeContext } from "../src/context/PipeContext";
 
 const { Content } = Layout;
 
+let timeout;
+
 export default function Home() {
   const { id } = useContext(PipeContext);
-
-  const previous = useRef(null);
-  const next = useRef(null);
+  const [showDashboard, setShowDashboard] = useState(false);
 
   const [page, setPage] = useState("1");
 
   useEffect(() => {
-    previous.current = id;
-    console.log("Id Changed");
-  }, [id])
+    if (id) {
+      console.log("ID changed to: ", id);
+      setShowDashboard(false);
 
-  const renderDashboard = () => {
-
-    if (previous.current !== next.current) {
-      console.log("rendering");
-      next.current = previous.current
-      return null
+      timeout = setTimeout(() => {
+        setShowDashboard(true);
+      }, 100)
     }
 
-    return <Dashboard />
+    return () => clearTimeout(timeout)
+  }, [id])
+
+  let content = <div className="no-pipe">
+    <p>No pipe selected! </p>
+    <p>Please select a pipe from the map to the left.</p>
+  </div>
+
+  if (typeof id === "number") {
+    content = <Spin />
   }
 
   function getPage() {
@@ -54,7 +60,7 @@ export default function Home() {
               <Map />
             </Col>
             <Col span={6} style={{ padding: "16px" }}>
-              {renderDashboard()}
+              {showDashboard ? <Dashboard /> : content}
             </Col>
           </Row>
         )

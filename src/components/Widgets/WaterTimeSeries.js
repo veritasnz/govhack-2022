@@ -11,6 +11,9 @@ export const WaterTimeSeries = ({ latestWaterLevel }) => {
     if (data.current.length > 200) {
       data.current.shift();
     }
+
+    latestWaterLevel = latestWaterLevel + (Math.random() * 0.1) - 0.05;
+
     data.current.push({
       time: index.current,
       level: Math.min(latestWaterLevel, 100)

@@ -89,7 +89,7 @@ main {
   margin-top: 16px;
   background: black;
   height: 48px;
-  color: #16ABBD;
+  color: #16abbd;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -145,4 +145,12 @@ main {
 
 .metric-container {
   height: calc(100% - 16px);
+}
+
+/*
+* No Pipe
+*/
+.no-pipe {
+  margin-top: 3rem;
+  color: white;
 }

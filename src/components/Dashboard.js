@@ -57,13 +57,6 @@ export const Dashboard = () => {
       }, POLLRATE);
     }
   }
-  // const { data } = useSWR("", { refreshInterval: 1 });
-
-  // if (!pipeCtx.id) {
-  //   return <p>
-  //     No pipe specified
-  //   </p>;
-  // }
 
   return (
     <div className="widget-grid">
