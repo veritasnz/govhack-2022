@@ -175,3 +175,8 @@ main {
   flex-direction: "column";
   justify-content: "center";
 }
+
+.loading-spinner {
+  position: absolute;
+  top: 40%;
+}

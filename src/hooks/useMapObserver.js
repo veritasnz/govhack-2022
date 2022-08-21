@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 const ZOOM_LEVEL = 16;
 
-export const useMapObserver = (map) => {
+export const useMapObserver = (map, updateProgress) => {
   const [pipes, setPipes] = useState([]);
   const [isZoomed, setIsZoomed] = useState(false);
 
@@ -34,14 +34,18 @@ export const useMapObserver = (map) => {
 
     const url = process.env.NEXT_PUBLIC_ENDPOINT + `/pipe/?lat_p1=${neLat()}&lat_p2=${swLat()}&lon_p1=${neLng()}&lon_p2=${swLng()}`
 
-    console.log("Attempting fetch with url:", url);
+    console.info("Attempting fetch with url:", url);
+
+    updateProgress({ isLoading: true });
 
     fetch(url).then(resp => {
       return resp.json();
     }).then((data) => {
       setPipes(data);
+      updateProgress({ isLoading: false });
     }).catch((err) => {
       console.error("There has been a fetch error: ", err.message);
+      updateProgress({ isLoading: false });
     });
   }
 
