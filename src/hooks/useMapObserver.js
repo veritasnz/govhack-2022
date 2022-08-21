@@ -41,7 +41,10 @@ export const useMapObserver = (map, updateProgress) => {
     fetch(url).then(resp => {
       return resp.json();
     }).then((data) => {
-      setPipes(data);
+      // can receive non-arrays when error'ing
+      if (Array.isArray(data)) {
+        setPipes(data);
+      }
       updateProgress({ isLoading: false });
     }).catch((err) => {
       console.error("There has been a fetch error: ", err.message);
