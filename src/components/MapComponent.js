@@ -50,9 +50,11 @@ export const MapComponent = () => {
 
       {isLoadingPipes && <Spin className="loading-spinner" />}
 
-      {pipes && pipes.map((pipe) => {
-        return <Pipe key={pipe.id} pipe={pipe} map={map} />;
-      })}
+      {typeof pipes !== "undefined"
+        && pipes
+        && pipes.map((pipe) => {
+          return <Pipe key={pipe.id} pipe={pipe} map={map} />;
+        })}
     </div>
   );
 };
