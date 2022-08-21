@@ -11,8 +11,7 @@ import { WaterTimeSeries } from "./Widgets/WaterTimeSeries";
 const POLLRATE = 1;
 const NITEMS = 10000;
 
-export const Dashboard = ({ id }) => {
-  const pipeCtx = useContext(PipeContext);
+export const Dashboard = () => {
   const timer = useRef(null);
   const index = useRef(0);
   const currentData = useRef([]);
@@ -25,6 +24,7 @@ export const Dashboard = ({ id }) => {
     timer.current = setTimeout(() => {
       pollSomething()
     }, POLLRATE);
+
     return () => clearTimeout(timer.current);
   }, []);
 

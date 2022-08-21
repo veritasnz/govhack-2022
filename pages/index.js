@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 import { Layout, Row, Col } from "antd";
 
@@ -8,11 +8,33 @@ import { CCTV } from "../src/components/CCTV";
 import { Dashboard } from "../src/components/Dashboard";
 import Navigation from "../src/components/Navigation";
 import ActionsPage from "./Actions";
+import { PipeContext } from "../src/context/PipeContext";
 
 const { Content } = Layout;
 
 export default function Home() {
+  const { id } = useContext(PipeContext);
+
+  const previous = useRef(null);
+  const next = useRef(null);
+
   const [page, setPage] = useState("1");
+
+  useEffect(() => {
+    previous.current = id;
+    console.log("Id Changed");
+  }, [id])
+
+  const renderDashboard = () => {
+
+    if (previous.current !== next.current) {
+      console.log("rendering");
+      next.current = previous.current
+      return null
+    }
+
+    return <Dashboard />
+  }
 
   function getPage() {
     switch (page) {
@@ -32,7 +54,7 @@ export default function Home() {
               <Map />
             </Col>
             <Col span={6} style={{ padding: "16px" }}>
-              <Dashboard />
+              {renderDashboard()}
             </Col>
           </Row>
         )
