@@ -24,11 +24,17 @@ const getWaterSymbolColor = (levelNumber) => {
   return "blue"
 };
 
-const animateWaterFlow = (googleMapsPolyline) => {
+const getFlowSpeed = (levelNumber) => {
+  if (levelNumber === 0) return 5;
+  if (levelNumber === 1) return 3;
+  if (levelNumber === 2) return 1;
+};
+
+const animateWaterFlow = (googleMapsPolyline, speed) => {
   let count = 0;
 
   window.setInterval(() => {
-    count = (count + 4) % 200;
+    count = (count + speed) % 200;
 
     const icons = googleMapsPolyline.get("icons");
 
@@ -85,7 +91,7 @@ export const Pipe = ({ map, pipe }) => {
 
     polyline.setMap(map);
 
-    animateWaterFlow(polyline);
+    animateWaterFlow(polyline, getFlowSpeed(flow_rate));
   }, []);
 
   useEffect(() => {
