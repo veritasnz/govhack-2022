@@ -60,9 +60,9 @@ export default function Home() {
               <Map />
             </Col>
             <Col span={6} style={{ padding: "16px" }}>
-              <div className="col-vert">
-                {showDashboard ? <Dashboard /> : content}
-              </div>
+
+              {showDashboard ? <Dashboard /> : <div className="col-vert">{content}</div>}
+
             </Col>
           </Row>
         )
