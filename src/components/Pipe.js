@@ -16,6 +16,27 @@ const getColor = (levelNumber) => {
   return "blue"
 };
 
+const getWaterSymbolColor = (levelNumber) => {
+  if (levelNumber === 0) return "#39FF14";
+  if (levelNumber === 1) return "#FFF01F";
+  if (levelNumber === 2) return "#FF3131";
+
+  return "blue"
+};
+
+const animateWaterFlow = (googleMapsPolyline) => {
+  let count = 0;
+
+  window.setInterval(() => {
+    count = (count + 4) % 200;
+
+    const icons = googleMapsPolyline.get("icons");
+
+    icons[0].offset = count / 2 + "%";
+    googleMapsPolyline.set("icons", icons);
+  }, 20);
+}
+
 /**
  * { id, level, startPoint, endPoint }
  * E.g. point: { lat: 37.772, lng: -122.214 }
@@ -23,6 +44,16 @@ const getColor = (levelNumber) => {
 export const Pipe = ({ map, pipe }) => {
   const pipeCtx = useContext(PipeContext);
   const { id, flow_rate, geometries } = pipe;
+
+  const waterSymbol = {
+    path: "M 4.5 4.5 H 9 V 9 H 1 L 1 1",
+    scale: 1,
+    strokeColor: getWaterSymbolColor(flow_rate),
+    fillColor: getWaterSymbolColor(flow_rate),
+    fillOpacity: 0.2,
+    strokeOpacity: 0.2,
+    rotation: 0
+  };
 
   const options = {
     ...DEFAULT_OPTIONS,
@@ -33,8 +64,15 @@ export const Pipe = ({ map, pipe }) => {
           lat: parseFloat(item.latitude),
           lng: parseFloat(item.longitude)
         }
-      })
+      }),
+    icons: [
+      {
+        icon: waterSymbol,
+        offset: "100%",
+      },
+    ]
   };
+
 
   const polyline = new google.maps.Polyline(options);
 
@@ -46,6 +84,8 @@ export const Pipe = ({ map, pipe }) => {
     if (!map) return;
 
     polyline.setMap(map);
+
+    animateWaterFlow(polyline);
   }, []);
 
   useEffect(() => {
