@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useZoomObserver } from "../hooks/useZoomObserver";
+import { useMapObserver } from "../hooks/useMapObserver";
 import { Pipe } from "./Pipe";
 
 import { MAP_STYLE } from "../utils/constants";
@@ -12,7 +12,6 @@ const options = {
   zoom: 11,
   styles: MAP_STYLE,
   disableDefaultUI: true
-
 };
 
 /**
@@ -31,7 +30,7 @@ export const MapComponent = () => {
     }
   }, [ref, map]);
 
-  const { pipes, isZoomed } = useZoomObserver(map);
+  const { pipes, isZoomed } = useMapObserver(map);
 
   return (
     <div className="map-wrapper">

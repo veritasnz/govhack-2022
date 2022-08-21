@@ -44,7 +44,7 @@ export default function Home() {
       <Head>
         <title>PipeWatch</title>
         <meta name="description" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon.png" />
       </Head>
       <main>
         <Layout>
