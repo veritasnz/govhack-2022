@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 const ZOOM_LEVEL = 16;
 
 export const useMapObserver = (map) => {
-  const [isZoomed, setIsZoomed] = useState(false);
   const [pipes, setPipes] = useState([]);
+  const [isZoomed, setIsZoomed] = useState(false);
 
   // Listen for zoom changes and adjust `isZoomed`
   useEffect(() => {

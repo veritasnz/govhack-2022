@@ -3,7 +3,7 @@ import { PipeContext } from "../context/PipeContext";
 
 const DEFAULT_OPTIONS = {
   geodesic: true,
-  strokeOpacity: 0.7,
+  strokeOpacity: 0.5,
   strokeWeight: 4,
   clickable: true,
 };
@@ -52,13 +52,14 @@ export const Pipe = ({ map, pipe }) => {
   const { id, flow_rate, geometries } = pipe;
 
   const waterSymbol = {
-    path: "M 4.5 4.5 H 9 V 9 H 1 L 1 1",
-    scale: 1,
+    path: "M 1 1 H 9 V 9 H 1 L 1 1",
+    scale: 0.6,
     strokeColor: getWaterSymbolColor(flow_rate),
     fillColor: getWaterSymbolColor(flow_rate),
-    fillOpacity: 0.2,
-    strokeOpacity: 0.2,
-    rotation: 0
+    fillOpacity: 1,
+    strokeOpacity: 1,
+    rotation: 0,
+    anchor: new google.maps.Point(5.5, 9)
   };
 
   const options = {
