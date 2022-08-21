@@ -8,10 +8,15 @@ import { WaterLevel } from "./Widgets/WaterLevel";
 import { WaterVelocity } from "./Widgets/WaterVelocity";
 import { WaterTimeSeries } from "./Widgets/WaterTimeSeries";
 
+const POLLRATE = 1;
+const NITEMS = 10000;
+
 export const Dashboard = ({ id }) => {
   const pipeCtx = useContext(PipeContext);
   const timer = useRef(null);
-  const index = useRef(Math.floor(Math.random() * 40000));
+  const index = useRef(0);
+  const currentData = useRef([]);
+  const randomNextIndex = useRef(Math.floor(Math.random() * 40000));
   const [waterLevel, setWaterLevel] = useState(undefined);
   const [randomSeed, setRandomSeed] = useState(Math.random());
   const [randomProfile, setRandomProfile] = useState(Math.floor(Math.random() * 9))
@@ -19,28 +24,38 @@ export const Dashboard = ({ id }) => {
   useEffect(() => {
     timer.current = setTimeout(() => {
       pollSomething()
-    }, 1000);
+    }, POLLRATE);
     return () => clearTimeout(timer.current);
   }, []);
 
   function pollSomething() {
-    axios.get(
-      "https://a4f1-131-203-239-250.au.ngrok.io/sensor/generate",
-      {
-        params: {
-          start_idx: index.current,
-          end_idx: index.current + 1,
-          seed: randomSeed,
-          noise_profile_idx: randomProfile
+    if ((index.current % NITEMS) == 0) {
+      axios.get(
+        "https://a4f1-131-203-239-250.au.ngrok.io/sensor/generate/",
+        {
+          params: {
+            start_idx: randomNextIndex.current,
+            end_idx: randomNextIndex.current + NITEMS,
+            seed: randomSeed,
+            noise_profile_idx: randomProfile
+          }
         }
-      }
-    ).then(res => {
+      ).then(res => {
+        index.current = 1;
+        randomNextIndex.current = randomNextIndex.current + NITEMS;
+        setWaterLevel(res.data.values[0]);
+        currentData.current = res.data.values;
+        timer.current = setTimeout(() => {
+          pollSomething()
+        }, POLLRATE);
+      });
+    } else {
+      setWaterLevel(currentData.current[index.current]);
       index.current = index.current + 1;
-      setWaterLevel(res.data.values[0]);
       timer.current = setTimeout(() => {
         pollSomething()
-      }, 1000);
-    })
+      }, POLLRATE);
+    }
   }
   // const { data } = useSWR("", { refreshInterval: 1 });
 
@@ -50,35 +65,6 @@ export const Dashboard = ({ id }) => {
   //   </p>;
   // }
 
-  const data = {
-    id: pipeCtx.id,
-    level: 0.7049, // Added
-    geometries: [
-      {
-        id: 1,
-        latitude: 1.0,
-        longitude: 1.0,
-        level: 0.0,
-        pipe: 0
-      },
-      {
-        id: 2,
-        latitude: 2.0,
-        longitude: 2.0,
-        level: 0.0,
-        pipe: 0
-      }
-    ],
-    asset_id: "000000",
-    pipe_type: "Gravity",
-    length: 10.0,
-    shape_length: 0.0,
-    district: "Christchurch",
-    diameter: 1,
-    material: "Unknown",
-    depth: -1.0
-  }
-
   return (
     <div className="widget-grid">
       <div className="widget">
@@ -87,7 +73,10 @@ export const Dashboard = ({ id }) => {
             <span>Water Level (Current)</span>
           </Select.Option>
         </Select>
-        <WaterLevel waterLevel={waterLevel} />
+        <WaterLevel
+          index={index.current}
+          waterLevel={waterLevel}
+        />
       </div>
       <div className="widget">
         <Select defaultValue="1" style={{ width: "100%" }}>
@@ -95,7 +84,7 @@ export const Dashboard = ({ id }) => {
             <span>Water Level (Time Series)</span>
           </Select.Option>
         </Select>
-        <WaterTimeSeries waterVelocity={data.level} />
+        <WaterTimeSeries latestWaterLevel={waterLevel} />
       </div>
       <div className="widget">
         <Select defaultValue="1" style={{ width: "100%" }}>
@@ -103,7 +92,7 @@ export const Dashboard = ({ id }) => {
             <span>Water Velocity</span>
           </Select.Option>
         </Select>
-        <WaterVelocity waterVelocity={data.level} />
+        <WaterVelocity index={index.current} />
       </div>
     </div>
   );

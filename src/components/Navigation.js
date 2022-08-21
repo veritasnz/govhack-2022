@@ -14,7 +14,8 @@ const LABEL_STYLE = {
   top: "-8px",
   fontSize: "small",
   height: "16px",
-  lineHeight: "16px"
+  lineHeight: "16px",
+  textAlign: "center"
 }
 
 export default function Navigation({ page, setPage }) {
@@ -26,6 +27,14 @@ export default function Navigation({ page, setPage }) {
         selectedKeys={[page]}
         onClick={item => setPage(item.key)}
       >
+        <div style={{
+          height: "60px",
+          background: `url('/image.png') no-repeat`,
+          backgroundSize: "contain",
+          backgroundPosition: "center",
+          marginTop: "16px",
+        }} />
+        <div style={{ ...LABEL_STYLE, top: "0px", marginBottom: "16px" }}>PipeWatch</div>
         <Menu.Item key="1">
           <AppstoreOutlined style={ICON_STYLE} />
           <div style={LABEL_STYLE}>Dashboard</div>
