@@ -38,7 +38,7 @@ function RightPanel() {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios.get(
-      "https://a4f1-131-203-239-250.au.ngrok.io/pipe/all/",
+      process.env.NEXT_PUBLIC_ENDPOINT + "/pipe/all/",
       {
         params: {}
       }

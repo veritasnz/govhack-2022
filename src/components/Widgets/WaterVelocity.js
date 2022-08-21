@@ -10,7 +10,7 @@ export const WaterVelocity = ({ index }) => {
   useEffect(() => {
     if ((index % 100) == 0) {
       axios.get(
-        "https://a4f1-131-203-239-250.au.ngrok.io/sensor/generate/",
+        process.env.NEXT_PUBLIC_ENDPOINT + "/sensor/generate/",
         {
           params: {
             start_idx: randomNextIndex.current,

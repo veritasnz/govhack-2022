@@ -109,16 +109,18 @@ main {
 }
 
 .map-warning {
-  color: rgb(191, 0, 0);
+  color: white;
   position: absolute;
   z-index: 2;
   top: 1.6rem;
   left: 1.6rem;
+  right: 1.6rem;
   padding: 1rem;
   font-size: 1.2rem;
   font-weight: bold;
-  background: white;
+  background: #16abbd;
   border-radius: 5px;
+  text-align: center;
   box-shadow: 0 0 1.4rem rgba(0, 0, 0, 0.3);
 }
 

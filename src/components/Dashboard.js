@@ -31,7 +31,7 @@ export const Dashboard = () => {
   function pollSomething() {
     if ((index.current % NITEMS) == 0) {
       axios.get(
-        "https://a4f1-131-203-239-250.au.ngrok.io/sensor/generate/",
+        process.env.NEXT_PUBLIC_ENDPOINT + "/sensor/generate/",
         {
           params: {
             start_idx: randomNextIndex.current,
