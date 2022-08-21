@@ -48,7 +48,7 @@ export const MapComponent = () => {
 
       <div ref={ref} className="map-container" style={{ opacity }} />
 
-      {isLoadingPipes && <Spin className="loading-spinner" />}
+      {isLoadingPipes && <div className="loading-spinner"><Spin size="large" /></div>}
 
       {typeof pipes !== "undefined"
         && pipes
