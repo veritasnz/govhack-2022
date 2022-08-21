@@ -34,19 +34,12 @@ export default function Home() {
   }, [id])
 
   let content = <div className="no-pipe">
-    <p>No pipe selected! </p>
+    <h2>No pipe selected! </h2>
     <p>Please select a pipe from the map to the left.</p>
   </div>
 
   if (typeof id === "number") {
-    content = <div style={{
-      height: "100%",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center"
-    }}>
-      <Spin size="large" />
-    </div>
+    content = <Spin size="large" />
   }
 
   function getPage() {
@@ -67,7 +60,9 @@ export default function Home() {
               <Map />
             </Col>
             <Col span={6} style={{ padding: "16px" }}>
-              {showDashboard ? <Dashboard /> : content}
+              <div className="col-vert">
+                {showDashboard ? <Dashboard /> : content}
+              </div>
             </Col>
           </Row>
         )

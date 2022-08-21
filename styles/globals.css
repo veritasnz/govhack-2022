@@ -153,4 +153,25 @@ main {
 .no-pipe {
   margin-top: 3rem;
   color: white;
+  text-align: center;
+}
+
+.no-pipe h2 {
+  font-size: 1.2em;
+  color: white;
+}
+
+.no-pipe p:first-child {
+  margin-bottom: 0.6em;
+}
+
+.no-pipe p {
+  line-height: 1.2;
+}
+
+.col-vert {
+  height: "100%";
+  display: "flex";
+  flex-direction: "column";
+  justify-content: "center";
 }
