@@ -7,7 +7,9 @@ const CONTAINER_STYLE = {
   background: "black",
   padding: "8px",
   display: "flex",
-  gap: "16px"
+  gap: "16px",
+  overflowY: "scroll"
+
 }
 
 export default function BottomPanel() {
