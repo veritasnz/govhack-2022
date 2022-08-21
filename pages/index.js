@@ -39,7 +39,14 @@ export default function Home() {
   </div>
 
   if (typeof id === "number") {
-    content = <Spin />
+    content = <div style={{
+      height: "100%",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center"
+    }}>
+      <Spin size="large" />
+    </div>
   }
 
   function getPage() {

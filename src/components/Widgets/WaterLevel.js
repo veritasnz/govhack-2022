@@ -4,6 +4,10 @@ import { useEffect, useState } from 'react';
 export const WaterLevel = ({ index, waterLevel }) => {
   const [currentLevel, setCurrentLevel] = useState(waterLevel);
   useEffect(() => {
+    if (!currentLevel) {
+      setCurrentLevel(waterLevel)
+    }
+
     if ((index % 100) == 0) {
       console.log("updated")
       setCurrentLevel(Math.min(waterLevel, 1));
