@@ -3,15 +3,15 @@ import { PipeContext } from "../context/PipeContext";
 
 const DEFAULT_OPTIONS = {
   geodesic: true,
-  strokeOpacity: 1.0,
+  strokeOpacity: 0.7,
   strokeWeight: 4,
   clickable: true,
 };
 
 const getColor = (levelNumber) => {
-  if (levelNumber === 0) return "green";
-  if (levelNumber === 1) return "yellow";
-  if (levelNumber === 2) return "red";
+  if (levelNumber === 0) return "#39FF14";
+  if (levelNumber === 1) return "#FFF01F";
+  if (levelNumber === 2) return "#FF3131";
 
   return "blue"
 };
@@ -33,7 +33,7 @@ const getFlowSpeed = (levelNumber) => {
 const animateWaterFlow = (googleMapsPolyline, speed) => {
   let count = 0;
 
-  window.setInterval(() => {
+  return window.setInterval(() => {
     count = (count + speed) % 200;
 
     const icons = googleMapsPolyline.get("icons");
@@ -86,16 +86,23 @@ export const Pipe = ({ map, pipe }) => {
     pipeCtx.setId(id);
   });
 
+  let intervalHandler;
+
   useEffect(() => {
     if (!map) return;
 
     polyline.setMap(map);
 
-    animateWaterFlow(polyline, getFlowSpeed(flow_rate));
+    intervalHandler = animateWaterFlow(polyline, getFlowSpeed(flow_rate));
   }, []);
 
   useEffect(() => {
-    return () => polyline.setMap(null);
+    return () => {
+
+      polyline.setMap(null);
+
+      clearInterval(intervalHandler);
+    }
   }, []);
 
   return;
